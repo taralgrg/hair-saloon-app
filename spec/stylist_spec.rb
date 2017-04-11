@@ -1,4 +1,5 @@
 require("spec_helper")
+require('pry')
 
 describe(Stylist) do
 
@@ -53,9 +54,9 @@ describe(Stylist) do
     it("returns an array of clients for that stylist") do
       test_stylist = Stylist.new({:name => "Moringaschool stuff",  :id => nil})
       test_stylist.save()
-      test_client = Client.new({:name => "Learn SQL", :stylist_id => test_stylist.id()})
+      test_client = Client.new({:name => "Learn SQL", :stylist_id => test_stylist.id(), :id => nil})
       test_client.save()
-      test_client2 = Client.new({:name => "Review Ruby", :stylist_id => test_stylist.id()})
+      test_client2 = Client.new({:name => "Review Ruby", :stylist_id => test_stylist.id(), :id => nil})
       test_client2.save()
       expect(test_stylist.clients()).to(eq([test_client, test_client2]))
     end
@@ -83,9 +84,9 @@ describe(Stylist) do
     it("deletes a stylist's clients from the database") do
       stylist = Stylist.new({:name => "Moringa School stuff", :id => nil})
       stylist.save()
-      client = Client.new({:name => "learn SQL", :stylist_id => stylist.id()})
+      client = Client.new({:name => "learn SQL", :stylist_id => stylist.id(), :id => nil})
       client.save()
-      client2 = Client.new({:name => "Review Ruby", :stylist_id => stylist.id()})
+      client2 = Client.new({:name => "Review Ruby", :stylist_id => stylist.id(), :id => nil})
       client2.save()
       stylist.delete()
       expect(Client.all()).to(eq([]))

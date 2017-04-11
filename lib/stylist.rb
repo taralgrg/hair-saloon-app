@@ -42,8 +42,9 @@ class Stylist
     clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id()};")
     clients.each() do |client|
       name = client.fetch("name")
+      id = client.fetch('id').to_i()
       stylist_id = client.fetch("stylist_id").to_i()
-      stylist_clients.push(Client.new({:name => name, :stylist_id => stylist_id}))
+      stylist_clients.push(Client.new({:name => name, :stylist_id => stylist_id, :id => id}))
     end
     stylist_clients
   end
@@ -51,11 +52,11 @@ class Stylist
   define_method(:update) do |attributes|
     @name = attributes.fetch(:name)
     @id = self.id()
-    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = '#{self.id()}';")
-    end
+    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{self.id()};")
   end
 
   define_method(:delete) do
     DB.exec("DELETE FROM stylists WHERE id = #{self.id()};")
     DB.exec("DELETE FROM clients WHERE stylist_id = #{self.id()};")
   end
+end

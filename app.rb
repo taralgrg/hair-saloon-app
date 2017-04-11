@@ -4,11 +4,19 @@ require("sinatra")
   require("./lib/client")
   require("./lib/stylist")
   require("pg")
+  require('pry')
 
   DB = PG.connect({:dbname => "hair_saloon"})
 
+  post("/") do
+    @stylists= Stylist.all()
+    @clients=Client.all()
+    erb(:index)
+  end
+
   get("/") do
     @stylists= Stylist.all()
+    @clients=Client.all()
     erb(:index)
   end
 
@@ -17,6 +25,7 @@ require("sinatra")
     stylist = Stylist.new({:name => name, :id => nil})
     stylist.save()
     @stylists = Stylist.all()
+    @clients=Client.all()
     erb(:index)
   end
 
@@ -51,4 +60,28 @@ require("sinatra")
      @stylist.delete()
      @stylists = Stylist.all()
      erb(:index)
+   end
+
+   get("/clients/:id/edit") do
+     @client = Client.find(params.fetch("id").to_i())
+     erb(:client_edit)
+   end
+
+   patch("/clients/:id") do
+     name = params.fetch("name")
+     @client = Client.find(params.fetch("id").to_i())
+     @client.update({:name => name})
+     erb(:success)
+    end
+
+   delete("/clients/:id") do
+     @client = Client.find(params.fetch("id").to_i())
+     @client.delete()
+     @clients = Client.all()
+     erb(:success)
+   end
+
+   get("/clients/:id") do
+     @client = Client.find(params.fetch("id").to_i())
+     erb(:client)
    end

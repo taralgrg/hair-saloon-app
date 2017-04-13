@@ -1,18 +1,18 @@
 <h1>Your Current Stylists</h1>
 
-  <% if @stylists.any?() %>
-    <h3>Here are the list of all the stylists:</h3>
+<% if @stylists.any?() %>
+<h3>Here are the list of all the stylists:</h3>
 
-    <ul>
-      <% @stylists.each() do |stylist| %>
-        <li>
-          <a href="/stylists/<%=stylist.id()%>"><%= stylist.name() %></a>
-        </li>
-      <% end %>
-    </ul>
+<ul>
+    <% @stylists.each() do |stylist| %>
+    <li>
+        <a href="/stylists/<%=stylist.id()%>"><%= stylist.name() %></a>
+    </li>
+    <% end %>
+</ul>
 
-  <% else %>
+<% else %>
 
-      <p>There are no stylists yet!</p>
+<p>There are no stylists yet!</p>
 
-  <% end %>
+<% end %>

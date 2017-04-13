@@ -1,22 +1,38 @@
-<h1><%= @stylist.name() %></h1>
+<div class="container">
+    <ul class="nav nav-pills">
+        <li role="presentation">
+            <a href="/">Home</a>
+        </li>
+        <li role="presentation">
+            <a href="/">Return to Main Page</a>
+        </li>
+    </ul>
+</div>
 
-<% if @stylist.clients().any?() %>
-<h3>Here are all the clients in this Stylist's list:</h3>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+
+        <h2></h2>Here are all the clients in
+        <%= @stylist.name() %>'s list:
+    </div>
+</h2 <% if @stylist.clients().any?() %>
 
 <ul>
-  <% @stylist.clients().each() do |client| %>
-  <li>  <a href="/clients/<%= client.id() %>"><%= client.name()  %></a>
-  </li>
-  <% end %>
+    <% @stylist.clients().each() do |client| %>
+    <li>
+        <a href="/clients/<%= client.id() %>"><%= client.name()  %></a>
+    </li>
+    <% end %>
 </ul>
 
 <% else %>
 <p>There are no clients in this Stylist's list!</p>
 <% end %>
-
+</div>
 
 <hr>
 
+<!-- <ul class="nav nav-tabs nav-justified">
 <div class="container">
   <a href="/">Home</a>
 </div>
@@ -26,3 +42,4 @@
       </a>
   </p>
 </div>
+</ul> -->

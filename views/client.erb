@@ -1,21 +1,35 @@
-<div class="container text-center">
-  <h2> Current salons for this client </h2>
-  <h3> Client Name: <%= @client.name() %></h3>
+<div class="container">
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active">
+            <a href="/clients/<%= @client.id() %>/edit">Edit Client
+                <%= @client.name() %></a>
+        </li>
+        <li role="presentation" class="active">
+            <a href="/">Return to Main Page</a>
+        </li>
+    </ul>
+</div>
+<br/><br/>
 
-    <% if @client.stylists().any?() %>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Current Stylists for this client
+        </div>
+        <div class="panel-body">
+            Client Name:
+            <%= @client.name() %>
 
-     <ul>
-       <% @client.stylists().each() do |stylist| %>
-         <li><%= stylist.name()%></li>
-       <% end %>
-     </ul>
+            <% if @client.stylists().any?() %>
 
-     <% else %>
-       <p>There are no salons for this client</p>
-    <% end %>
+            <ul>
+                <% @client.stylists().each() do |stylist| %>
+                <li><%= stylist.name()%></li>
+                <% end %>
+            </ul>
 
-
- <div class="container text-center">
-   <button class="btn"><a href="/clients/<%= @client.id() %>/edit">Edit Client <%= @client.name() %></a></button>
-   <button class="btn"><a href="/">Return to Main Page</a></button>
- </div>
+        <% else %>
+            <p>There are no salons for this client</p>
+            <% end %>
+        </div>
+    </div>

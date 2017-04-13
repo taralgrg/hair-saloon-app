@@ -1,39 +1,62 @@
-<h1>Hair Saloon APP</h1>
+<div class="container">
 
-<p>List a New Stylist:</p>
+    <h1>Hair Saloon APP</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        List a New Stylist:
+    </div>
+    <div class="panel-body">
+        <form action="/stylists" method="post">
+            <label for="name">Input the Stylist's Name:</label>
+            <input id="name" name="name" type="text">
 
-<form action="/stylists" method="post">
-  <label for="name">Input the Stylist's Name:</label>
-  <input id="name" name="name" type="text">
+            <button type="submit">Add New Stylist</button>
+        </form>
+    </div>
+</div>
 
-  <button type="submit">Add New Stylist</button>
-</form>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Add Clients to any Stylists:
+    </div>
+    <div class="panel-body">
+        <form action="/clients" method="post">
+            <label for="stylist_id">Select a Stylist</label>
+            <select id='stylist_id' name='stylist_id' type='text'>
+                <% @stylists.each() do |stylist| %>
+                <option value="<%= stylist.id()%>">
+                    <%= stylist.name() %>
+                </option>
+                <% end %>
+            </select>
 
-<p> Add Clients to any Stylists:</p>
+            <label for="name">Name of the Client:</label>
+            <input id="name" name="name" type="text">
 
-<form action="/clients" method="post">
-  <label for="stylist_id">Select a Stylist</label>
-  <select id='stylist_id' name='stylist_id' type='text'>
-    <% @stylists.each() do |stylist| %>
-    <option value="<%= stylist.id()%>"> <%= stylist.name() %> </option>
-    <% end %>
-  </select>
+            <button type="submit">Add Client</button>
+        </form>
+    </div>
+</div>
 
-  <label for="name">Name of the Client:</label>
-  <input id="name" name="name" type="text">
+<div class="panel panel-primary">
+    <% if @stylists.any?() %>
+    <div class="panel-heading">
 
-  <button type="submit">Add Client</button>
-</form>
+        Click on the Stylist to see its clients:
+    </div>
+    <div class="panel-body">
 
-
-<% if @stylists.any?() %>
-<p>Click on the Stylist to see its clients:</p>
-
-<ul>
-  <% @stylists.each do |stylist| %>
-  <li><a href="/stylists/<%= stylist.id() %>"><%= stylist.name() %> </a></li>
-  <% end %>
-</ul>
-<% else %>
-<p>There are no Stylist yet!</p>
-<% end %>
+        <ul class="list-group">
+            <% @stylists.each do |stylist| %>
+            <li class="list-group-item">
+                <a href="/stylists/<%= stylist.id() %>"><%= stylist.name() %>
+                </a>
+            </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <p>There are no Stylist yet!</p>
+        <% end %>
+    </div>
+</div>

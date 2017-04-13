@@ -1,29 +1,38 @@
-<h1>Update/Delete <%=@stylist.name() %>'s</h1>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Update/Delete
+            <%=@stylist.name() %>'s
+        </div>
+        <div class="panel-body">
 
-  <form action="/stylists/<%= @stylist.id() %>" method="post">
-    <input name="_method" type="hidden" value="patch">
+            <form action="/stylists/<%= @stylist.id() %>" method="post" style="display: inline;">
+                <input name="_method" type="hidden" value="patch">
 
-    <label for="name">Rename the Stylist's name:</label>
-    <input id="name" name="name" type="text">
+                <label for="name">Rename the Stylist's name:</label>
+                <input id="name" name="name" type="text">
 
-    <button type="submit">Update</button>
-  </form>
+                <button type="submit">Update</button>
+            </form>
 
-  <form action="/stylists/<%= @stylist.id() %>" method="post">
-     <input name="_method" type="hidden" value="delete">
+            <form action="/stylists/<%= @stylist.id() %>" method="post" style="display: inline;">
+                <input name="_method" type="hidden" value="delete">
 
-     <button type="submit">Delete Stylist</button>
-   </form>
+                <button type="submit">Delete Stylist</button>
+            </form>
+        </div>
+    </div>
+    <% if @stylist.clients().any?() %>
+    <h3>Here are all the clients in this Stylist's list:</h3>
 
-   <% if @stylist.clients().any?() %>
-   <h3>Here are all the clients in this Stylist's list:</h3>
+    <ul>
+        <% @stylist.clients().each() do |client| %>
+        <li>
+            <a href="/clients/<%= client.id() %>"><%= client.name %></li>
+            <% end %>
+        </ul>
 
-   <ul>
-     <% @stylist.clients().each() do |client| %>
-     <li> <a href="/clients/<%= client.id() %>"><%= client.name %></li>
-     <% end %>
-   </ul>
-
-   <% else %>
-   <p>There are no clients in this Stylist's list!</p>
-   <% end %>
+    <% else %>
+        <p>There are no clients in this Stylist's list!</p>
+        <% end %>
+    </div>

@@ -52,6 +52,7 @@ require("sinatra")
      name = params.fetch("name")
      @stylist = Stylist.find(params.fetch("id").to_i())
      @stylist.update({:name => name})
+
      erb(:stylist)
     end
 
@@ -71,7 +72,7 @@ require("sinatra")
      name = params.fetch("name")
      @client = Client.find(params.fetch("id").to_i())
      @client.update({:name => name})
-     erb(:success)
+     erb(:stylist)
     end
 
    delete("/clients/:id") do
